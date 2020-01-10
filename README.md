@@ -21,7 +21,7 @@ The first method I can think to do this is just convert the random number to a s
 
 Next part of the shift class will need to get the Date and format it to a useable set of numbers if one isn't provided.
 
-DateTime.now.strftime(%d%m%y)  -
+DateTime.now.strftime('%d%m%y')  -
 
 %d - gives a zero padded day
 %m - gives a zero padded month
@@ -44,3 +44,5 @@ This will create the final shift sections.
 With this we can reduce a hash with array.each_with_index.reduce({}) { |acc, (value, index)| acc[(65 + index).chr] = value + date_array[index];acc}
 
 This will give me the result I want above.
+
+x.each_cons(2) {|cons_slice| y << cons_slice}
