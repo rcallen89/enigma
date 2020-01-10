@@ -29,7 +29,7 @@ DateTime.now.strftime('%d%m%y')  -
 
 Once I have the random shift and the Date information I can find the information I need.
 
-The random number with do an each_con(2) to split it into four arrays with each consecutive number together.  Then turn these back to integers.
+The random number with do an each_con(2) with a block {|con_nums| and push to a new array to store} to split it into four arrays with each consecutive number together.  Then turn these back to integers.
 
 The Date will be squared and then pull the last 4 digits from (x.to_s[-4..-1].chars)
 
