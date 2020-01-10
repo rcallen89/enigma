@@ -11,9 +11,9 @@ class ShiftTest < Minitest::Test
   def test_it_exists_with_default_values_random_with_todays_date
     assert_instance_of Shift, @shift
 
-    x = DateTime.now.strftime('%d%m%y')
+    today = DateTime.now.strftime('%d%m%y')
     assert_equal 5, @shift.key.length
-    assert_equal x, @shift.date_info
+    assert_equal today, @shift.date_info
   end
 
   def test_can_pass_own_values
@@ -22,6 +22,8 @@ class ShiftTest < Minitest::Test
   end
 
   def test_key_can_be_broken_down_to_consecutive_arrays
-  
+    expected = [01, 12, 23, 34]
+
+    assert_equal expected, @shift2.key_breaker
   end
 end
