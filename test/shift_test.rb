@@ -30,6 +30,12 @@ class ShiftTest < Minitest::Test
   def test_date_can_be_return_last_4_of_squared_amount_in_array
     expected = [4, 4, 0, 0]
 
-    assert_equal expected, @shift2.date_manipulation
+    assert_equal expected, @shift2.date_manipulator
+  end
+
+  def test_broken_keys_can_be_added_to_date_array_returned_as_hash
+    expected = {"A" => 5, "B" => 16, "C" => 23, "D" => 34}
+
+    assert_equal expected, @shift2.create_shifts
   end
 end
