@@ -55,8 +55,8 @@ class EnigmaTest < Minitest::Test
     array = ['a', 'b', 'c', 'd']
     array2 = ['a', 'b', ',', 'd']
 
-    assert_equal ["b", "c", "d", "e"], @enigma.letter_shifter(array, [1, 1, 1, 1])
-    assert_equal ["b", "c", ",", "e"], @enigma.letter_shifter(array2, [1, 1, 1, 1])
+    assert_equal ["b", "c", "d", "e"], @enigma.letter_shifter(array, [1, 1, 1, 1], "e")
+    assert_equal ["b", "c", ",", "e"], @enigma.letter_shifter(array2, [1, 1, 1, 1], "e")
   end
 
   def test_broken_message_can_be_joined
@@ -100,13 +100,13 @@ class EnigmaTest < Minitest::Test
   def test_letters_can_be_uncoded
     scrambled = ["b", "c", "d", "e"]
 
-    assert_equal ['a', 'b', 'c', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1])
+    assert_equal ['a', 'b', 'c', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1], "d")
   end
 
   def test_letters_can_be_uncoded_with_punctuation
     scrambled = ["b", "c", ",", "e"]
 
-    assert_equal ['a', 'b', ',', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1])
+    assert_equal ['a', 'b', ',', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1], "d")
   end
 
   def test_message_can_be_decrypted
