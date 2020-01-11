@@ -26,7 +26,6 @@ class Enigma
 
   def letter_shifter(array, shift_amounts)
     array.map.with_index do |char, index|
-      # require 'pry'; binding.pry
       if @char_array.include?(char)
         shifted = @char_array.rotate(shift_amounts[index])
         char_index = @char_array.index(char)
@@ -39,6 +38,18 @@ class Enigma
 
   def joiner(broken_message)
       broken_message.flatten.join
+  end
+
+  def letter_unshifter(array, shift_amounts)
+    array.map.with_index do |char, index|
+      if @char_array.include?(char)
+        shifted = @char_array.rotate(shift_amounts[index])
+        char_index = shifted.index(char)
+        char = @char_array[char_index]
+      else
+        char
+      end
+    end
   end
 
 

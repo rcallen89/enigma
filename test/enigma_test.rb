@@ -97,4 +97,26 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.encrypt("hel", "02715", "040895")
   end
 
+  def test_letters_can_be_uncoded
+    scrambled = ["b", "c", "d", "e"]
+
+    assert_equal ['a', 'b', 'c', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1])
+  end
+
+  def test_letters_can_be_uncoded_with_punctuation
+    scrambled = ["b", "c", ",", "e"]
+
+    assert_equal ['a', 'b', ',', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1])
+  end
+
+  def test_message_can_be_decrypted
+    expected = {
+                  decryption: "hello world",
+                  key: "02715",
+                  date: "040895"
+                }
+
+    assert_equal expected, enigma.decrypt("keder ohulw", "02715", "040895")
+  end
+
 end
