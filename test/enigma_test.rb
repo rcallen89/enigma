@@ -42,7 +42,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt_message_encrypts_and_returns_hash
-    skip
     expected = {
                   encryption: "keder ohulw",
                   key: "02715",
@@ -58,6 +57,44 @@ class EnigmaTest < Minitest::Test
 
     assert_equal ["b", "c", "d", "e"], @enigma.letter_shifter(array, [1, 1, 1, 1])
     assert_equal ["b", "c", ",", "e"], @enigma.letter_shifter(array2, [1, 1, 1, 1])
+  end
+
+  def test_broken_message_can_be_joined
+    broken = [["k", "e", "d", "e"], 
+              ["r", " ", "o", "h"],
+              ["u", "l", "w"]]
+
+    assert_equal "keder ohulw", @enigma.joiner(broken)
+  end
+
+  def test_encrypt_can_ignore_punctuation
+    expected = {
+                  encryption: "keder ohulw!",
+                  key: "02715",
+                  date: "040895"
+                }
+
+    assert_equal expected, @enigma.encrypt("hello world!", "02715", "040895")
+  end
+
+  def test_encryption_can_change_casing
+    expected = {
+                  encryption: "keder ohulw",
+                  key: "02715",
+                  date: "040895"
+                }
+
+    assert_equal expected, @enigma.encrypt("hello WORLD", "02715", "040895")
+  end
+
+  def test_encryption_can_handle_smaller_messages
+    expected = {
+                  encryption: "ked",
+                  key: "02715",
+                  date: "040895"
+                }
+
+    assert_equal expected, @enigma.encrypt("hel", "02715", "040895")
   end
 
 end

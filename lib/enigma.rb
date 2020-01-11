@@ -4,12 +4,10 @@ class Enigma
     @char_array = ("a".."z").to_a << " "
   end
 
-  def encrypt(message, key = nil, date = nil)
-    char_slices.each do |char_slice|
-      char_slice.each_with_index do |char, index|
-
-      end
-    end
+  def encrypt(message, key = Array.new(5){rand(10)}.join, date = DateTime.now.strftime('%d%m%y'))
+    {encryption: joiner(message_shifter(message, key, date)),
+    key: key,
+    date: date}
   end
 
   def message_breakdown(message)
@@ -18,7 +16,7 @@ class Enigma
     char_slices
   end
 
-  def message_shifter(message, key = Array.new(5){rand(10)}.join, date = DateTime.now.strftime('%d%m%y'))
+  def message_shifter(message, key, date)
     shift_info = Shift.new(key, date)
     broken_message = message_breakdown(message)
     broken_message.map.with_index do |char_slice, index|
@@ -37,6 +35,10 @@ class Enigma
         char
       end
     end
+  end
+
+  def joiner(broken_message)
+      broken_message.flatten.join
   end
 
 
