@@ -38,7 +38,7 @@ class EnigmaTest < Minitest::Test
               ["u", "l", "w"]]
 
 
-    assert_equal expected, @enigma.message_shifter(message, "02715", "040895")
+    assert_equal expected, @enigma.message_shifter(message, [3, 27, 73, 20], "e")
   end
 
   def test_encrypt_message_encrypts_and_returns_hash
@@ -116,10 +116,13 @@ class EnigmaTest < Minitest::Test
                   date: "040895"
                 }
 
+                # require 'pry'; binding.pry
+
     assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
   def test_encoded_message_can_be_cracked
+
     expected = {
                   decryption: "hello world end",
                   date: "291018",
