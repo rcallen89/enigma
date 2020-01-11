@@ -100,13 +100,13 @@ class EnigmaTest < Minitest::Test
   def test_letters_can_be_uncoded
     scrambled = ["b", "c", "d", "e"]
 
-    assert_equal ['a', 'b', 'c', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1], "d")
+    assert_equal ['a', 'b', 'c', 'd'], @enigma.letter_shifter(scrambled, [1, 1, 1, 1], "d")
   end
 
   def test_letters_can_be_uncoded_with_punctuation
     scrambled = ["b", "c", ",", "e"]
 
-    assert_equal ['a', 'b', ',', 'd'], @enigma.letter_unshifter(scrambled, [1, 1, 1, 1], "d")
+    assert_equal ['a', 'b', ',', 'd'], @enigma.letter_shifter(scrambled, [1, 1, 1, 1], "d")
   end
 
   def test_message_can_be_decrypted

@@ -26,11 +26,7 @@ class Enigma
     shift_info = Shift.new(key, date)
     broken_message = message_breakdown(message)
     broken_message.map.with_index do |char_slice, index|
-      # if flag == "e"
-        letter_shifter(char_slice, shift_info.shifts_table.values, flag)
-      # else
-      #   letter_unshifter(char_slice, shift_info.shifts_table.values)
-      # end
+      letter_shifter(char_slice, shift_info.shifts_table.values, flag)
     end
   end
 
@@ -55,18 +51,5 @@ class Enigma
   def joiner(broken_message)
       broken_message.flatten.join
   end
-
-  def letter_unshifter(array, shift_amounts, flag)
-    array.map.with_index do |char, index|
-      if @char_array.include?(char)
-        shifted = @char_array.rotate(shift_amounts[index])
-        char_index = shifted.index(char)
-        char = @char_array[char_index]
-      else
-        char
-      end
-    end
-  end
-
 
 end
