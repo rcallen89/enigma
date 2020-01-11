@@ -11,9 +11,10 @@ class ShiftTest < Minitest::Test
   def test_it_exists_with_default_values_random_with_todays_date
     assert_instance_of Shift, @shift
 
-    today = DateTime.now.strftime('%d%m%y')
+    @shift.stubs(:date_info => 100120)
+    
     assert_equal 5, @shift.key.length
-    assert_equal today.to_i, @shift.date_info
+    assert_equal 100120, @shift.date_info
   end
 
   def test_can_pass_own_values
