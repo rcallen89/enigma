@@ -1,13 +1,16 @@
+require "Date"
+
 class Shift
   attr_reader :key, :date_info, :shifts_table
 
-  def initialize(key = Array.new(5){rand(10)}.join, date = DateTime.now.strftime('%d%m%y'))
+  def initialize(key = nil, date = nil)
     @key = key_verification(key.to_s)
-    @date_info = date.to_i
+    @date_info = date ||= DateTime.now.strftime('%d%m%y')
     @shifts_table = create_shifts
   end
 
   def key_verification(key)
+    return Array.new(5){rand(10)}.join if key == ""
     return key if key != nil && key.length == 5
     until key.length == 5
       key = key.chars.unshift("0").join
@@ -24,7 +27,7 @@ class Shift
   end
 
   def date_manipulator
-    (date_info**2).to_s.chars[-4..-1].map {|num| num.to_i}
+    (date_info.to_i**2).to_s.chars[-4..-1].map {|num| num.to_i}
   end
 
   def create_shifts

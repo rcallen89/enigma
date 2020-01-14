@@ -1,21 +1,23 @@
+require_relative './shift'
+
 class Enigma
 
   def initialize
     @char_array = ("a".."z").to_a << " "
   end
 
-  def encrypt(message, key = Array.new(5){rand(10)}.join, date = DateTime.now.strftime('%d%m%y'))
+  def encrypt(message, key = nil, date = nil)
     shift_info = Shift.new(key, date)
     {encryption: joiner(message_shifter(message, shift_info.shifts_table.values)),
-    key: key,
-    date: date}
+    key: shift_info.key,
+    date: shift_info.date_info}
   end
 
-  def decrypt(message, key = Array.new(5){rand(10)}.join, date = DateTime.now.strftime('%d%m%y'))
+  def decrypt(message, key = nil, date = nil)
     shift_info = Shift.new(key, date)
     {decryption: joiner(message_shifter(message, shift_info.shifts_table.values, "d")),
     key: shift_info.key,
-    date: date}
+    date: shift_info.date_info}
   end
 
   def message_breakdown(message)
@@ -54,7 +56,7 @@ class Enigma
       broken_message.flatten.join
   end
 
-  def crack(message, date = DateTime.now.strftime('%d%m%y'))
+  def crack(message, date = nil)
     key = 0
     until decrypt(message, key, date)[:decryption][-4..-1] == " end"
       decrypt(message, key, date)[:key]
