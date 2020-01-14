@@ -128,7 +128,7 @@ class EnigmaTest < Minitest::Test
                   date: "291018",
                   key: "08304"
                 }
-
+                
     assert_equal expected, @enigma.crack("vjqtbeaweqihssi", "291018")
   end
 
