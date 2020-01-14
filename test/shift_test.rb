@@ -12,14 +12,23 @@ class ShiftTest < Minitest::Test
     assert_instance_of Shift, @shift
 
     @shift.stubs(:date_info => 100120)
-    
+
     assert_equal 5, @shift.key.length
     assert_equal 100120, @shift.date_info
   end
 
+  def test_key_verification
+    shift3 = Shift.new("45")
+    shift4 = Shift.new(nil, "100120")
+
+    assert_equal "00045", shift3.key
+    assert_equal 5, shift4.key.length
+
+  end
+
   def test_can_pass_own_values
     assert_equal "01234", @shift2.key
-    assert_equal 100120, @shift2.date_info
+    assert_equal "100120", @shift2.date_info
   end
 
   def test_key_can_be_broken_down_to_consecutive_arrays
